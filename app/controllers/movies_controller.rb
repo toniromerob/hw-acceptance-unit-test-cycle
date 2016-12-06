@@ -60,5 +60,14 @@ class MoviesController < ApplicationController
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
   end
+  
+  # Controller method to receive the click from "Find With Same Director"
+  def similar
+    @movie, @movies, error = Movie.find_with_same_director(params[:id])
+    if error
+      flash[:notice] = "'No director info for #{@movie.title}'"
+      redirect_to movies_path() and return
+    end
+  end
 
 end
