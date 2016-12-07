@@ -3,13 +3,4 @@ class Movie < ActiveRecord::Base
     %w(G PG PG-13 NC-17 R)
   end
   
-  def self.find_with_same_director(director)
-    movie = self.find(id)
-    if not movie.director.empty?
-      movies = self.where(:director => movie.director)
-      return [movie, movies, false]
-    else
-      return [movie, [], true]
-    end
-  end
 end
